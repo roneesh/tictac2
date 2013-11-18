@@ -18,22 +18,13 @@ class Game
   end
 
   def run_game_loop
-    until game_over?
+    begin
       make_move(player1)
       make_move(player2) unless winner?
-    end
-    puts result
-  end
-
-  def game_over?
-    if winner? 
-      result = winner?
-    elsif board.full?
-      result = "Cat game!"
-    else
-      result = false
-    end
-  end
+      draw_board
+    end while winner? == false
+    puts winner?
+  end 
 
   def make_move(player)
     selection = player.give_move.to_i
@@ -65,13 +56,32 @@ class Game
     ] 
     winning_combos.each do |combo|
       if ((board.state[combo[0]] == player1) && (board.state[combo[1]] == player1) && (board.state[combo[2]] == player1))
-        # return "Player 1 wins with #{combo}!"
+        # return player1
+        return "Player 1 wins with #{combo}!"
       elsif ((board.state[combo[0]] == player2) && (board.state[combo[1]] == player2) && (board.state[combo[2]] == player2))
-        # return "Player 2 wins with #{combo}!"
+        # return player2
+        return "Player 2 wins with #{combo}!"
       end
     end
     return false
   end
+
+  def draw_board
+    puts ""
+    puts "#{mark(1)} | #{mark(2)} | #{mark(3)} "
+    puts "#{mark(4)} | #{mark(5)} | #{mark(6)} "
+    puts "#{mark(7)} | #{mark(8)} | #{mark(9)} "
+    puts ""
+  end
+
+  def mark(position)
+    if board.state[position].respond_to?(:symbol)
+      board.state[position].symbol
+    else
+      "_"
+    end
+  end
+
 
 end
 

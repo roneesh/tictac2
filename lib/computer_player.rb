@@ -1,6 +1,6 @@
 class ComputerPlayer
 
-  attr_accessor :symbolå
+  attr_accessor :symbol
 
   def initialize(symbol = "C")
     @symbol = symbol

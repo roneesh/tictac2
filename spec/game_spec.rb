@@ -13,19 +13,12 @@ describe Game, '#initialize' do
   end
 end
 
-describe Game, '#run_game' do
-  
-end
 
 describe Game, '#what_do_you_do?' do
   it 'tells us what it does' do
     game = Game.new
     game.what_do_you_do?.should eq('I manage the rules and flow of the game.')
   end
-end
-
-describe Game, '#make_move' do
-
 end
 
 describe Game, '#valid_move?' do
@@ -77,7 +70,7 @@ describe Game, '#winner?' do
       8 => "empty",
       9 => "empty"
     }
-    g.winner.should eq(p1)
+    g.winner?.should eq(p1)
   end
 
   it 'returns p2 if the board state has p2 winning' do
@@ -96,7 +89,7 @@ describe Game, '#winner?' do
       8 => "emtpy",
       9 => p1
     }
-    g.winner.should eq(p2)
+    g.winner?.should eq(p2)
   end 
 
   it 'returns false if there is not a winning board state' do
@@ -115,6 +108,6 @@ describe Game, '#winner?' do
       8 => "empty",
       9 => "empty"
     }
-    g.winner.should be_false
+    g.winner?.should be_false
   end
 end
