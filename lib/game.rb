@@ -21,10 +21,8 @@ class Game
     begin
       make_move(player1)
       draw_board
-      puts board.state
       make_move(player2) unless game_over?
       draw_board
-      puts board.state
     end while game_over? == false
     puts "Cat Game!" if board.full?
     puts winner? if winner?
