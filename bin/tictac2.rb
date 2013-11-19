@@ -33,4 +33,3 @@ end
 
 b = Board.new
 g = Game.new({player1: p1, player2: p2, board: b})
-g.run_game_loop

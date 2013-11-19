@@ -10,6 +10,7 @@ class Game
     @player1 = args[:player1]
     @player2 = args[:player2]
     @board = args[:board]
+    run_game_loop
   end
 
   def what_do_you_do?
@@ -75,11 +76,9 @@ class Game
   private
 
   def draw_introduction
-    puts "(((((())))))"
-    puts "( ( (()) ) )"
-    puts "TIC TAC WHOA"
-    puts "(((((())))))"
-    puts "( ( (()) ) )"
+    puts "*** * ***  ***  *  ***  *** *** ***"
+    puts " *  * *     *  * * *     *  * * ** "
+    puts " *  * ***   *  * * ***   *  *** ***"
     puts ""
     puts ""
   end
