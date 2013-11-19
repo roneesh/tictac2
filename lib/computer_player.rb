@@ -12,7 +12,28 @@ class ComputerPlayer
   end
 
   def give_move
-    move = rand(1..9)
+    # move = rand(1..9)
+    intermediate_move
+  end
+
+  def novice_move
+    rand(1..9)
+  end
+
+  def intermediate_move
+
+  end
+
+  def my_moves
+    board.state.select{ |k,v| v == self}.keys
+  end
+
+  def their_moves
+    board.state.select { |k,v| (v != "empty") && (v != self)}.keys
+  end
+
+  def open_moves
+    board.state.select{ |k,v| v == "empty"}.keys
   end
 
 end
