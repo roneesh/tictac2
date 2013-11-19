@@ -81,5 +81,155 @@ describe ComputerPlayer, '#open_moves' do
       8 => "empty",
       9 => "empty"
     }
+    c.open_moves.should eq ([5,6,7,8,9])
   end
 end 
+
+describe ComputerPlayer, '#winning_move' do
+  it 'returns a winning move if one exists' do
+    b = Board.new
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => c,
+      2 => c,
+      3 => "empty",
+      4 => "empty",
+      5 => "empty",
+      6 => "empty",
+      7 => "empty",
+      8 => "empty",
+      9 => "empty"
+    }
+    c.winning_move.should eq (3)
+  end
+
+  it 'returns a winning move if one exists' do
+    b = Board.new
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => c,
+      2 => "empty",
+      3 => "empty",
+      4 => c,
+      5 => "empty",
+      6 => "empty",
+      7 => "empty",
+      8 => "empty",
+      9 => "empty"
+    }
+    c.winning_move.should eq (7)
+  end
+
+  it 'returns false if no winning move exists' do
+    b = Board.new
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => c,
+      2 => "empty",
+      3 => "empty",
+      4 => "empty",
+      5 => "empty",
+      6 => "empty",
+      7 => "empty",
+      8 => "empty",
+      9 => "empty"
+    }
+    c.winning_move.should be_false
+  end
+end
+
+describe ComputerPlayer, '#blocking_move' do
+  it 'returns false if no blocking move exists' do
+    b = Board.new
+    other_c = ComputerPlayer.new(b)
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => other_c,
+      2 => "empty",
+      3 => "empty",
+      4 => "empty",
+      5 => "empty",
+      6 => "empty",
+      7 => "empty",
+      8 => "empty",
+      9 => "empty"
+    }
+    c.blocking_move.should be_false
+  end
+
+  it 'returns a winning move if one exists' do
+    b = Board.new
+    other_c = ComputerPlayer.new(b)
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => other_c,
+      2 => other_c,
+      3 => "empty",
+      4 => "empty",
+      5 => "empty",
+      6 => "empty",
+      7 => "empty",
+      8 => "empty",
+      9 => "empty"
+    }
+    c.blocking_move.should eq (3)
+  end
+end
+
+describe ComputerPlayer, '#center_move' do
+  it 'takes the center move if it is available' do
+    b = Board.new
+    other_c = ComputerPlayer.new(b)
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => other_c,
+      2 => "empty",
+      3 => "empty",
+      4 => "empty",
+      5 => "empty",
+      6 => "empty",
+      7 => "empty",
+      8 => "empty",
+      9 => "empty"
+    }
+    c.center_move.should eq(5)
+  end
+
+    it 'returns false if the cener move is taken' do
+    b = Board.new
+    other_c = ComputerPlayer.new(b)
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => other_c,
+      2 => "empty",
+      3 => "empty",
+      4 => "empty",
+      5 => c,
+      6 => "empty",
+      7 => "empty",
+      8 => "empty",
+      9 => "empty"
+    }
+    c.center_move.should be_false
+  end
+end
+
+describe ComputerPlayer, '#novice_move' do
+  it 'selects randomly from the open moves' do
+    b = Board.new
+    other_c = ComputerPlayer.new(b)
+    c = ComputerPlayer.new(b)
+    b.state = {
+      1 => other_c,
+      2 => c,
+      3 => c,
+      4 => c,
+      5 => c,
+      6 => c,
+      7 => c,
+      8 => c,
+      9 => "empty"
+    }
+    c.novice_move.should eq (9)
+  end
+end
