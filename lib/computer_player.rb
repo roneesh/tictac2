@@ -1,8 +1,9 @@
 class ComputerPlayer
 
-  attr_accessor :symbol
+  attr_accessor :symbol, :board
 
-  def initialize(symbol = "C")
+  def initialize(board, symbol = "C")
+    @board = board
     @symbol = symbol
   end
 
