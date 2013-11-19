@@ -5,7 +5,6 @@ require_relative './computer_player.rb'
 class Game
 
   attr_reader :player1, :player2, :board
-  attr_accessor :result
 
   def initialize(args = {})
     @player1 = args[:player1]
@@ -18,13 +17,22 @@ class Game
   end
 
   def run_game_loop
+    draw_introduction
     begin
       make_move(player1)
-      make_move(player2) unless winner?
       draw_board
-    end while winner? == false
-    puts winner?
+      puts board.state
+      make_move(player2) unless game_over?
+      draw_board
+      puts board.state
+    end while game_over? == false
+    puts "Cat Game!" if board.full?
+    puts winner? if winner?
   end 
+
+  def game_over?
+    winner? || board.full?
+  end
 
   def make_move(player)
     selection = player.give_move.to_i
@@ -66,6 +74,18 @@ class Game
     return false
   end
 
+  private
+
+  def draw_introduction
+    puts "(((((())))))"
+    puts "( ( (()) ) )"
+    puts "TIC TAC WHOA"
+    puts "(((((())))))"
+    puts "( ( (()) ) )"
+    puts ""
+    puts ""
+  end
+
   def draw_board
     puts ""
     puts "#{mark(1)} | #{mark(2)} | #{mark(3)} "
@@ -85,8 +105,8 @@ class Game
 
 end
 
-p1 = HumanPlayer.new
-p2 = ComputerPlayer.new
+p1 = HumanPlayer.new("X")
+p2 = HumanPlayer.new("O")
 b = Board.new
 g = Game.new({player1: p1, player2: p2, board: b})
 g.run_game_loop
