@@ -88,13 +88,13 @@ class Game
 
   def draw_board
     puts ""
-    puts "#{mark(1)} | #{mark(2)} | #{mark(3)} "
-    puts "#{mark(4)} | #{mark(5)} | #{mark(6)} "
-    puts "#{mark(7)} | #{mark(8)} | #{mark(9)} "
+    puts "#{draw_mark(1)} | #{draw_mark(2)} | #{draw_mark(3)} "
+    puts "#{draw_mark(4)} | #{draw_mark(5)} | #{draw_mark(6)} "
+    puts "#{draw_mark(7)} | #{draw_mark(8)} | #{draw_mark(9)} "
     puts ""
   end
 
-  def mark(position)
+  def draw_mark(position)
     if board.state[position].respond_to?(:symbol)
       board.state[position].symbol
     else
@@ -105,8 +105,3 @@ class Game
 
 end
 
-p1 = HumanPlayer.new("X")
-p2 = HumanPlayer.new("O")
-b = Board.new
-g = Game.new({player1: p1, player2: p2, board: b})
-g.run_game_loop
